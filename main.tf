@@ -19,13 +19,13 @@ module "cloud-nat" {
   version       = "~> 1.2"
   project_id    = data.google_client_config.google.project
   region        = data.google_client_config.google.region
-  router        = "nat-router"
+  router        = "${var.name}-nat-router"
   create_router = true
   network       = google_compute_network.vpc_network.id
 }
 
 resource "google_compute_firewall" "ingress-nginx-controller-admission" {
-  name    = "ingress-nginx-controller-admission"
+  name    = "${var.name}-ingress-nginx-controller-admission"
   network = google_compute_network.vpc_network.id
 
   allow {
@@ -39,7 +39,7 @@ resource "google_compute_firewall" "ingress-nginx-controller-admission" {
 }
 
 resource "google_compute_global_address" "private_ip_address" {
-  name          = "private-ip-range"
+  name          = "${var.name}-private-ip-range"
   purpose       = "VPC_PEERING"
   address_type  = "INTERNAL"
   prefix_length = 16
