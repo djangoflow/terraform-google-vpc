@@ -22,6 +22,7 @@ module "cloud-nat" {
   router        = "${var.name}-nat-router"
   create_router = true
   network       = google_compute_network.vpc_network.id
+  nat_ips       = var.nat_ips
 }
 
 resource "google_compute_firewall" "ingress-nginx-controller-admission" {
