@@ -10,8 +10,10 @@ terraform {
 data "google_client_config" "google" {}
 
 resource "google_compute_network" "vpc_network" {
-  name                    = var.name
-  auto_create_subnetworks = true
+  name                     = var.name
+  auto_create_subnetworks  = true
+  enable_ula_internal_ipv6 = var.enable_ula_internal_ipv6
+  description              = var.description
 }
 
 module "cloud-nat" {
